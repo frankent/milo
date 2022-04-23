@@ -157,7 +157,7 @@ const Home = () => {
             <Col eleClass="col-md-8 offset-md-2">
               <Content>
                 <Row>
-                  <H2>ระบบช่วยคำนวณระยะทางแบบ "คร่าวๆ"</H2>
+                  <H2>ระบบช่วยคำนวณระยะทางแบบ &quot;คร่าวๆ&quot;</H2>
                 </Row>
 
                 <Row>

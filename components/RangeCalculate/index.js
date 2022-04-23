@@ -15,7 +15,7 @@ const BatteryPowerHolder = styled.span`
 const RangeCalculate = ({ totalWh, powerConsumption }) => {
   return (
     <>
-      <H3>แบตเตอรี่มีขนาด</H3>
+      <H3>ขนาดแบตเตอรี่</H3>
       <P>
         <BatteryPowerHolder>{`${totalWh.toFixed(2)} Wh`}</BatteryPowerHolder>
       </P>
