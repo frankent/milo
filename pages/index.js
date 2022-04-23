@@ -1,6 +1,9 @@
+import { useState } from "react";
 import Head from "next/head";
 import styled from "styled-components";
 import { Tag, Collapse } from "antd";
+import BatteryCapacity from "../components/BatteryCapacity";
+import RangeCalculate from "../components/RangeCalculate";
 import { H1, H2, H3, P } from "../components/Typo";
 
 const { Panel } = Collapse;
@@ -19,6 +22,12 @@ const Col = styled(({ className, eleClass, ...props }) => (
   background-color: #fff;
 `;
 
+const Row = styled(({ className, ...props }) => (
+  <div className={`${className} row`} {...props} />
+))`
+  margin-bottom: 15px;
+`;
+
 const Content = styled.div`
   padding: 15px;
 `;
@@ -28,6 +37,9 @@ const StyledCollapse = styled(Collapse)`
 `;
 
 const Home = () => {
+  const [totalWh, setTotalWh] = useState(2220);
+  const [powerConsumption, setPowerConsumption] = useState(50);
+
   return (
     <>
       <Head>
@@ -40,7 +52,7 @@ const Home = () => {
       </Head>
       <MiloContainer>
         <Container>
-          <div className="row">
+          <Row>
             <Col eleClass="col-md-8 offset-md-2">
               <Content>
                 <H1>ยินดีต้อนรับสู่ ไมล์ - (กิ)โล คลับ</H1>
@@ -139,7 +151,46 @@ const Home = () => {
                 </P>
               </Content>
             </Col>
-          </div>
+          </Row>
+
+          <Row>
+            <Col eleClass="col-md-8 offset-md-2">
+              <Content>
+                <Row>
+                  <H2>ระบบช่วยคำนวณระยะทางแบบคร่าวๆ</H2>
+                </Row>
+
+                <Row>
+                  <Col eleClass="col-md-7">
+                    <BatteryCapacity
+                      totalWh={totalWh}
+                      onWhChange={setTotalWh}
+                      onPowerConsumptionChange={setPowerConsumption}
+                    />
+                  </Col>
+                  <Col eleClass="col-md-5">
+                    <RangeCalculate
+                      totalWh={totalWh}
+                      powerConsumption={powerConsumption}
+                    />
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col eleClass={"col-12"}>
+                    <p>
+                      <strong>* สถิติอัตราการสิ้นเปลืองจากการใช้งานจริง</strong>
+                      <ul>
+                        <li>Deco SuperAce + กล่องเดิม: 28-35 Wh/Km</li>
+                        <li>Deco SuperAce + EM100 เปิด 65A: 40-45 Wh/Km</li>
+                        <li>Strom Gorilla: 40-50 Wh/Km</li>
+                      </ul>
+                    </p>
+                  </Col>
+                </Row>
+              </Content>
+            </Col>
+          </Row>
         </Container>
       </MiloContainer>
     </>
