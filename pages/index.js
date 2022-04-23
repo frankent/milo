@@ -161,23 +161,19 @@ const Home = () => {
                 </Row>
 
                 <Row>
-                  <Col eleClass="col-md-7">
-                    <BatteryCapacity
-                      totalWh={totalWh}
-                      onWhChange={setTotalWh}
-                      onPowerConsumptionChange={setPowerConsumption}
-                    />
-                  </Col>
-                  <Col eleClass="col-md-5">
+                  <Col eleClass="col-md-6">
                     <RangeCalculate
                       totalWh={totalWh}
                       powerConsumption={powerConsumption}
                     />
                   </Col>
-                </Row>
 
-                <Row>
-                  <Col eleClass={"col-12"}>
+                  <Col eleClass="col-md-6">
+                    <BatteryCapacity
+                      totalWh={totalWh}
+                      onWhChange={setTotalWh}
+                      onPowerConsumptionChange={setPowerConsumption}
+                    />
                     <p>
                       <strong>* สถิติอัตราการสิ้นเปลืองจากการใช้งานจริง</strong>
                       <ul>

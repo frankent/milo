@@ -59,8 +59,6 @@ const BatteryCapacity = ({ totalWh, onWhChange, onPowerConsumptionChange }) => {
     onPowerConsumptionChange(whkm);
   };
 
-  console.log(totalWh);
-
   return (
     <Form
       form={form}
