@@ -43,8 +43,8 @@ const Home = () => {
   return (
     <>
       <Head>
-        <title>คำนวน ระยะทาง แบตเตอรี่ ออนไลน์ - MiloCup</title>
-        <meta content="คำนวนระยะทางแบตเตอร์รี่ออนไลน์ - MiloCup" name="title" />
+        <title>คำนวน ระยะทาง แบตเตอรี่ ออนไลน์ - MiloCup | EV Bike Society</title>
+        <meta content="คำนวนระยะทางแบตเตอรี่ EV Bike Online - MiloCup | EV Bike Society" name="title" />
         <meta
           content="คำนวณระยะทางที่รถจะวิ่งได้ออนไลน์ จากข้อมูลผู้ใช้งานจริง บนท้องถนน ไม่หมกเม็ด - Mile / KiLo CUP"
           name="description"
@@ -57,7 +57,7 @@ const Home = () => {
         <meta property="og:type" content="article" />
         <meta
           property="og:title"
-          content="คำนวนระยะทางแบตเตอร์รี่ออนไลน์ - MiloCup"
+          content="คำนวนระยะทางแบตเตอรี่ EV Bike Online - MiloCup | EV Bike Society"
         />
         <meta
           property="og:description"
