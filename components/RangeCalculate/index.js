@@ -17,6 +17,9 @@ const BattInfo = styled.small`
 `;
 
 const RangeCalculate = ({ data }) => {
+  const numberFormat = (num) => {
+    return Number(num.toFixed(2)).toLocaleString("en-US");
+  };
   return (
     <>
       <H3>
@@ -24,27 +27,29 @@ const RangeCalculate = ({ data }) => {
         <br />
         <BattInfo>
           {" "}
-          {`${data.series * data.nominalVoltage}V ${data.capacity}Ah | (${
+          {`${numberFormat(data.series * data.nominalVoltage)}V ${numberFormat(
+            data.capacity
+          )}Ah | (${numberFormat(
             data.series * data.fullCharge
-          }V - ${data.series * data.fullDischarge}V)`}
+          )}V - ${numberFormat(data.series * data.fullDischarge)}V)`}
         </BattInfo>
       </H3>
       <P>
-        <BatteryPowerHolder>{`${data.wh.toFixed(2)} Wh`}</BatteryPowerHolder>
+        <BatteryPowerHolder>{`${numberFormat(data.wh)} Wh`}</BatteryPowerHolder>
       </P>
 
       <H3>ระยะทางที่วิ่งได้ DOD 100%</H3>
       <P>
-        <BatteryPowerHolder>{`${(data.wh / data.whkm).toFixed(
-          2
-        )} km`}</BatteryPowerHolder>
+        <BatteryPowerHolder>{`${numberFormat(
+          data.wh / data.whkm
+        )} Km`}</BatteryPowerHolder>
       </P>
 
       <H3>ระยะทางที่วิ่งได้ที่ DOD 80%</H3>
       <P>
-        <BatteryPowerHolder>{`${((data.wh * 0.8) / data.whkm).toFixed(
-          2
-        )} km`}</BatteryPowerHolder>
+        <BatteryPowerHolder>{`${numberFormat(
+          (data.wh * 0.8) / data.whkm
+        )} Km`}</BatteryPowerHolder>
       </P>
     </>
   );
