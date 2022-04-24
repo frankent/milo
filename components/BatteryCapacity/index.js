@@ -46,7 +46,7 @@ const batterySpec = {
   },
 };
 
-const BatteryCapacity = ({ totalWh, onWhChange, onPowerConsumptionChange }) => {
+const BatteryCapacity = ({ onWhChange, onPowerConsumptionChange }) => {
   const [form] = Form.useForm();
 
   const onDataChange = () => {
