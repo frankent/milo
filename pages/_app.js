@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import ReactGA from "react-ga4";
 import { createGlobalStyle, ThemeProvider } from "styled-components";
 import "antd/dist/antd.css";
@@ -16,10 +17,11 @@ body {
 `;
 
 function MyApp({ Component, pageProps }) {
-  ReactGA.initialize(GA_4);
-  ReactGA.send("pageview");
-
-  hotjar.initialize(2938370, 6);
+  useEffect(() => {
+    ReactGA.initialize(GA_4);
+    ReactGA.send("pageview");
+    hotjar.initialize(2938370, 6);
+  }, []);
 
   return (
     <>

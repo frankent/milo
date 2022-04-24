@@ -46,30 +46,24 @@ const batterySpec = {
   },
 };
 
-const BatteryCapacity = ({ onWhChange, onPowerConsumptionChange }) => {
+const BatteryCapacity = ({ data, onDataChange }) => {
   const [form] = Form.useForm();
 
-  const onDataChange = () => {
+  const onChange = () => {
     const { battType, capacity, series, whkm } = form.getFieldsValue();
     const battSpec = get(batterySpec, battType);
     if (!battSpec) return;
 
     const wh = battSpec.nominalVoltage * series * capacity;
-    onWhChange(wh);
-    onPowerConsumptionChange(whkm);
+    onDataChange({ ...battSpec, wh, whkm, battType, capacity, series });
   };
 
   return (
     <Form
       form={form}
       layout="vertical"
-      onFieldsChange={onDataChange}
-      initialValues={{
-        battType: "nmc",
-        series: 20,
-        capacity: 30,
-        whkm: 50,
-      }}
+      onFieldsChange={onChange}
+      initialValues={data}
     >
       <Form.Item label="ชนิดแบตเตอรี่" name="battType">
         <Select>

@@ -37,8 +37,20 @@ const StyledCollapse = styled(Collapse)`
 `;
 
 const Home = () => {
-  const [totalWh, setTotalWh] = useState(2220);
-  const [powerConsumption, setPowerConsumption] = useState(50);
+  const [state, setState] = useState({
+    wh: 2220,
+    whkm: 50,
+    battType: "nmc",
+    capacity: 30,
+    series: 20,
+    nominalVoltage: 3.6,
+    fullCharge: 4.2,
+    fullDischarge: 3.0,
+  });
+
+  const onDataChange = (data) => {
+    setState(data);
+  };
 
   return (
     <>
@@ -125,12 +137,12 @@ const Home = () => {
                     </P>
                     <P>
                       มีจุดที่ผู้ผลิตบางเจ้าแจ้งข้อมูลไม่ครบแก่ลูกค้าเช่น บอกว่า
-                      Battery เป็น <Tag>ระบบ 72v30Ah</Tag> เน้นย้ำนะครับ คำว่า
-                      <Tag>ระบบ</Tag> ซึ่งระบบ 72v ของ <Tag>Li-ion</Tag> ที่เป็น
-                      3.7v นั้นจะมีการใช้ 19s / 20s / 21s ซึ่ง V ที่ออกมา
+                      Battery เป็น <Tag>ระบบ 72V30Ah</Tag> เน้นย้ำนะครับ คำว่า
+                      <Tag>ระบบ</Tag> ซึ่งระบบ 72V ของ <Tag>Li-ion</Tag> ที่เป็น
+                      3.7v นั้นจะมีการใช้ 19S / 20S / 21S ซึ่ง V ที่ออกมา
                       จะยังทำงานกับกล่องควบคุมของรถได้อยู่ แต่ค่า Wh
                       จะต่างกันอย่างชัดเจน แต่เราก็ยังเรียก 3 แบบนี้ว่า เป็นระบบ
-                      72v
+                      72V
                     </P>
                     <P>
                       ส่วนการวัดค่าอัตราการสิ้นเปลืองแบบจริงๆ จังๆ เราจะดูที่
@@ -141,7 +153,7 @@ const Home = () => {
                       ที่วิ่งในขณะนั้นจะจ่ายที่ <Tag>
                         4000 / 84 = 47.62A
                       </Tag>{" "}
-                      แต่ถ้ากลับกัน ท่านลืมชาร์จแบต แล้วแบตเหลือแค่ 71v
+                      แต่ถ้ากลับกัน ท่านลืมชาร์จแบต แล้วแบตเหลือแค่ 71V
                       แบตของท่านจะถูกรีด A เป็นจำนวน{" "}
                       <Tag>4000 / 71 = 56.34A</Tag> แต่ถ้ารถของท่านเดิมๆ
                       จากบริษัท ซึ่งจะมีการ limit กระแสไว้ สมมุติว่า Limit
@@ -150,14 +162,14 @@ const Home = () => {
                     </P>
                     <P>
                       จาก ตย. ข้างบนน่าจะพอเข้าใจแบบคร่าวๆ
-                      ต่อมาการเทียบค่าอัตราการสิ้นเปลืองของรถ เราจะใช้เป็น Wh/KM
+                      ต่อมาการเทียบค่าอัตราการสิ้นเปลืองของรถ เราจะใช้เป็น Wh/Km
                       จากหน่วยก็จะพอเดาได้ว่า เราไม่สนใจว่าแบตจะเป็นกี่ V และ
                       กี่ Ah
                       โดยปกติรถค่าพวกนี้เราต้องติดเครื่องมือวัดเพิ่มเติมแล้วมาคำนวนย้อนทั้งทริป
                       เช่น ผมขี่รถเป็นระยะ 10km และมีการใช้ไฟไปแล้ว 400Wh
                       หมายความ รถผมมีอัตราการสิ้นเปลืองอยู่ที่{" "}
                       <Tag>400 / 10 = 40Wh/Km</Tag> ถ้าผมแบตเตอรี่ผมเป็น Li-ion
-                      72v 20S จะมีกำลังไฟฟ้าอยู่ที่{" "}
+                      72V 20S จะมีกำลังไฟฟ้าอยู่ที่{" "}
                       <Tag>3.7 * 20 * 30 = 2.22KWh</Tag>{" "}
                       และถ้าผมขี่ด้วยอัตราการสิ้นเปลือง 40Wh/Km นี้ไปเรื่อยๆ
                       จนแบตหมด ก็จะได้ระยะทาง <Tag>2220 / 40 = 55.5Km</Tag>
@@ -182,26 +194,19 @@ const Home = () => {
 
                 <Row>
                   <Col eleClass="col-md-6">
-                    <RangeCalculate
-                      totalWh={totalWh}
-                      powerConsumption={powerConsumption}
-                    />
+                    <RangeCalculate data={state} />
                   </Col>
 
                   <Col eleClass="col-md-6">
-                    <BatteryCapacity
-                      totalWh={totalWh}
-                      onWhChange={setTotalWh}
-                      onPowerConsumptionChange={setPowerConsumption}
-                    />
-                    <p>
+                    <BatteryCapacity data={state} onDataChange={onDataChange} />
+                    <div>
                       <strong>* สถิติอัตราการสิ้นเปลืองจากการใช้งานจริง</strong>
                       <ul>
                         <li>Deco SuperAce + กล่องเดิม: 28-35 Wh/Km</li>
                         <li>Deco SuperAce + EM100 เปิด 65A: 40-45 Wh/Km</li>
-                        <li>Strom Gorilla: 40-50 Wh/Km</li>
+                        <li>Strom Gorilla: 40-56 Wh/Km</li>
                       </ul>
-                    </p>
+                    </div>
                   </Col>
                 </Row>
               </Content>

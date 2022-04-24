@@ -12,24 +12,37 @@ const BatteryPowerHolder = styled.span`
   font-size: 30px;
 `;
 
-const RangeCalculate = ({ totalWh, powerConsumption }) => {
+const BattInfo = styled.small`
+  color: blue;
+`;
+
+const RangeCalculate = ({ data }) => {
   return (
     <>
-      <H3>ขนาดแบตเตอรี่</H3>
+      <H3>
+        ขนาดแบตเตอรี่
+        <br />
+        <BattInfo>
+          {" "}
+          {`${data.series * data.nominalVoltage}V ${data.capacity}Ah | (${
+            data.series * data.fullCharge
+          }V - ${data.series * data.fullDischarge}V)`}
+        </BattInfo>
+      </H3>
       <P>
-        <BatteryPowerHolder>{`${totalWh.toFixed(2)} Wh`}</BatteryPowerHolder>
+        <BatteryPowerHolder>{`${data.wh.toFixed(2)} Wh`}</BatteryPowerHolder>
       </P>
 
       <H3>ระยะทางที่วิ่งได้ DOD 100%</H3>
       <P>
-        <BatteryPowerHolder>{`${(totalWh / powerConsumption).toFixed(
+        <BatteryPowerHolder>{`${(data.wh / data.whkm).toFixed(
           2
         )} km`}</BatteryPowerHolder>
       </P>
 
       <H3>ระยะทางที่วิ่งได้ที่ DOD 80%</H3>
       <P>
-        <BatteryPowerHolder>{`${((totalWh * 0.8) / powerConsumption).toFixed(
+        <BatteryPowerHolder>{`${((data.wh * 0.8) / data.whkm).toFixed(
           2
         )} km`}</BatteryPowerHolder>
       </P>
