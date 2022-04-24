@@ -4,6 +4,7 @@ import "antd/dist/antd.css";
 
 import "../styles/globals.css";
 import TopNav from "../components/TopNav";
+import { hotjar } from "react-hotjar";
 
 const GA_4 = "G-FQDVFZDYD2";
 const themeColor = { primary: "#0a9f37", secondary: "#753a28" };
@@ -17,6 +18,8 @@ body {
 function MyApp({ Component, pageProps }) {
   ReactGA.initialize(GA_4);
   ReactGA.send("pageview");
+
+  hotjar.initialize(2938370, 6);
 
   return (
     <>
