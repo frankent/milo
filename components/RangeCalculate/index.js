@@ -18,6 +18,7 @@ const BattInfo = styled.small`
 
 const RangeCalculate = ({ data }) => {
   const numberFormat = (num) => {
+    if (!num) return 0;
     return Number(num.toFixed(2)).toLocaleString("en-US");
   };
   return (
